@@ -10,26 +10,18 @@
     <script src="js/jquery.vide.js"></script>
   </head>
 
-  <body>
-    <!-- <script src="jquery.vide.js"></script> -->
-
-<form id='register' action='register.php' method='post'
-    accept-charset='UTF-8'>
-<fieldset >
-<legend>Register</legend>
-<input type='hidden' name='submitted' id='submitted' value='1'/>
-<label for='name' >Your Full Name*: </label>
-<input type='text' name='name' id='name' maxlength="50" />
-<label for='email' >Email Address*:</label>
-<input type='text' name='email' id='email' maxlength="50" />
- 
-<label for='username' >UserName*:</label>
-<input type='text' name='username' id='username' maxlength="50" />
- 
-<label for='password' >Password*:</label>
-<input type='password' name='password' id='password' maxlength="50" />
-<input type='submit' name='Submit' value='Submit' />
- 
-</fieldset>
+ <body>
+<div style="position: absolute; z-index: -1; top: 0px; left: 0px; bottom: 0px; right: 0px; overflow: hidden; -webkit-background-size: cover; background-image: url(http://previews.123rf.com/images/kritchanut/kritchanut1312/kritchanut131200059/24736221-Green-fern-leaves-on-light-wood-background-border-design-Stock-Photo.jpg)
+		background-size: cover; background-position: 50% 50%; background-repeat: no-repeat;opacity:0.9;">
+<form name="registration" method="post" action="registration.php">
+<!-- we will create registration.php after registration.html -->
+USERNAME:<input type="text" name="name" value=""></br>
+EMAIL-ID:<input type="text" name="email" value=""></br>
+PASSWORD:<input type="text" name="password" value=""></br>
+RE-PASSWORD:<input type="text" name="repassword" value=""></br>
+<input type="submit" name="submit" value="submit">
 </form>
 
+</body>
+</head>
+</html>
