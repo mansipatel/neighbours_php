@@ -57,7 +57,7 @@ if(!isset($_SESSION['username'])) { //if not yet logged in
             <h2 class="star"><span>Sidebar</span> Menu</h2>
             <div class="clr"></div>
             <ul class="sb_menu">
-              <li class="active"><a href="#">Home</a></li>
+              <li class="active"><a href="homePage.php">Home</a></li>
               <li><a href="#">Friends</a></li>
               <li><a href="#">Neighbours</a></li>
               <li><a href="#">Pending Friend Requests</a></li>
