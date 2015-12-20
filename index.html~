@@ -14,10 +14,7 @@
     <!-- <script src="jquery.vide.js"></script> -->
 
     <!--<body data-vide-bg="background.jpg">  -->
-    <div style="position: absolute; z-index: -1; top: 0px; left: 0px; bottom: 0px; right: 0px; overflow: hidden; -webkit-background-size: cover; 
-
-		<!--background-image: url(http://fernando.is/video/background.jpg);   -->
-		background-size: cover; background-position: 50% 50%; background-repeat: no-repeat;opacity:0.9;">
+    <div style="position: absolute; z-index: -1; top: 0px; left: 0px; bottom: 0px; right: 0px; overflow: hidden; -webkit-background-size: cover; background-image: url(http://previews.123rf.com/images/kritchanut/kritchanut1312/kritchanut131200059/24736221-Green-fern-leaves-on-light-wood-background-border-design-Stock-Photo.jpg);background-size: cover; background-position: 50% 50%; background-repeat: no-repeat;opacity:0.9;">
       <video autoplay="" loop="" style="visibility: visible; margin: auto; position: absolute; z-index: -1; top: 50%; left: 50%; -webkit-transform: translate(-50%, -50%); transform: translate(-50%, -50%); width: auto; height: 1195px;>
 					<!-- -webkit-filter: blur(15px); -moz-filter: blur(15px);-o-filter: blur(15px);-ms-filter: blur(15px);filter: blur(15px);"> -->
 					<source src="images/output.mp4" type="video/mp4">
@@ -26,8 +23,12 @@
 
 <div id="outer-wrapper">
 	<div class="navbar-collapse collapse">
-          <ul class="nav navbar-nav">
-            <li class="active"><a href="#"><b> <a href="#" id="click-me">Login</b></a></li>
+        <ul class="nav navbar-nav">
+        <div class="action_btns">
+					<div class="one_half"><a href="#" id="login_form" class="btn">Login</a></div>
+					<div class="one_half last"><a href="#" id="register_form" class="btn">Sign up</a></div>
+		</div>
+            <!-- <li class="active"><a href="#"><b> <a href="#" id="click-me">Login</b></a></li>
 				<form class="body">
 		  
 		  <legend class="legend">Login</legend>
@@ -50,9 +51,10 @@
 		  </div>
 		  
 		</form>
-            <li><a href="signup.php"><b>Sign Up</b></a></li> 
+            <li><a href="signup.htm"><b>Sign Up</b></a></li> 
           </ul>
-          </ul>
+          </ul> -->
+    </div>
 
   <main>
     <div class="frame">
