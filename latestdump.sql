@@ -286,7 +286,7 @@ CREATE TABLE `profiles` (
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
   CONSTRAINT `profiles_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -295,7 +295,7 @@ CREATE TABLE `profiles` (
 
 LOCK TABLES `profiles` WRITE;
 /*!40000 ALTER TABLE `profiles` DISABLE KEYS */;
-INSERT INTO `profiles` VALUES (1,13,'Hi, My name is Curtis Hays  and I reside in Lodel  neighbourhood since 5 years.I wish to join Houston Street bock since my house is on Houston Street.I am alawyer by profession.I love to make friends and I love NYC',NULL),(2,12,'Hi, My name is Zoe Blevins  and I reside in Lodel  neighbourhood since 5 years.I wish to join Houston Street bock since my house is on Houston Street.I am a programmer by profession.I love to make friends and I love NYC',NULL);
+INSERT INTO `profiles` VALUES (1,13,'Hi, My name is Curtis Hays  and I reside in Lodel  neighbourhood since 5 years.I wish to join Houston Street bock since my house is on Houston Street.I am alawyer by profession.I love to make friends and I love NYC',NULL),(2,12,'Hi, My name is Zoe Blevins  and I reside in Lodel  neighbourhood since 5 years.I wish to join Houston Street bock since my house is on Houston Street.I am a programmer by profession.I love to make friends and I love NYC',NULL),(7,7,'Thsi is super awesome',NULL),(8,6,'This is about me',NULL);
 /*!40000 ALTER TABLE `profiles` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -357,7 +357,7 @@ CREATE TABLE `users` (
   KEY `hood_id` (`hood_id`),
   KEY `block_id` (`block_id`),
   CONSTRAINT `users_ibfk_1` FOREIGN KEY (`hood_id`) REFERENCES `neighbourhoods` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -366,7 +366,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (6,'adm','avani09@gmail.com','Xera123','Avani','Shah','2015-10-10 00:00:00','2015-11-10 00:00:00',2,2,'2011234563','confirmed',NULL),(7,'mpatel','mpatel08@yahoo.com','UYBn678','Mansi','Patel','2014-10-15 00:00:00','2015-11-17 00:00:00',2,2,'7321234567','confirmed',NULL),(8,'psekar','ppriyas@gmail.com','hello178','Priya','Sekar','2015-08-13 00:00:00','2015-11-19 00:00:00',3,3,'6178909876','confirmed',NULL),(9,'cshah','chirag25@gmail.com','TRGy56q','Chirag','Shah','2014-09-10 00:00:00','2015-11-20 00:00:00',4,6,'9187680935','confirmed',NULL),(10,'mjoe','mark_joe@gmail.com','treAAq','Mark','Jose','2014-12-25 00:00:00','2015-11-12 00:00:00',4,7,'7180982345','confirmed',NULL),(11,'spatel','sp@mailinator.com','bfjasdfksf','Shivam','Patel','2014-10-15 00:00:00','2015-11-20 00:00:00',3,3,'4586321568','confirmed',NULL),(12,'zblevins','zoe@mailinator.com','fsafdas@455fds','Zoe','Blevins','2014-10-15 00:00:00','2015-11-12 00:00:00',4,6,'5896321458','pending',NULL),(13,'chays','curtis@mailinator','fdasfa(493489fdsfask','Curtis','Hays','2014-10-15 00:00:00','2015-11-12 00:00:00',4,7,'8652134568','confirmed',NULL),(14,'hulk','danielm@gmail.com','DMMd','Daniel','Mugglin','2015-12-23 17:41:36','2015-11-18 00:00:00',4,7,'7134322356','confirmed',NULL),(35,'mp3950@nyu.edu','mp3950@nyu.edu','pass','Mansi','Patel','2015-12-25 05:43:05','2015-12-25 05:43:05',10,11,NULL,'pending','7310');
+INSERT INTO `users` VALUES (6,'adm','avani09@gmail.com','Xera123','Avani','Shah','2015-10-10 00:00:00','2015-11-10 00:00:00',2,2,'2011234563','confirmed',NULL),(7,'mpatel','mpatel08@yahoo.com','UYBn678','Mansi','Patel','2014-10-15 00:00:00','2015-11-17 00:00:00',2,2,'7321234567','confirmed',NULL),(8,'psekar','ppriyas@gmail.com','hello178','Priya','Sekar','2015-08-13 00:00:00','2015-11-19 00:00:00',3,3,'6178909876','confirmed',NULL),(9,'cshah','chirag25@gmail.com','TRGy56q','Chirag','Shah','2014-09-10 00:00:00','2015-11-20 00:00:00',4,6,'9187680935','confirmed',NULL),(10,'mjoe','mark_joe@gmail.com','treAAq','Mark','Jose','2014-12-25 00:00:00','2015-11-12 00:00:00',4,7,'7180982345','confirmed',NULL),(11,'spatel','sp@mailinator.com','bfjasdfksf','Shivam','Patel','2014-10-15 00:00:00','2015-11-20 00:00:00',3,3,'4586321568','confirmed',NULL),(12,'zblevins','zoe@mailinator.com','fsafdas@455fds','Zoe','Blevins','2014-10-15 00:00:00','2015-11-12 00:00:00',4,6,'5896321458','pending',NULL),(13,'chays','curtis@mailinator','fdasfa(493489fdsfask','Curtis','Hays','2014-10-15 00:00:00','2015-11-12 00:00:00',4,7,'8652134568','confirmed',NULL),(14,'hulk','danielm@gmail.com','DMMd','Daniel','Mugglin','2015-12-23 17:41:36','2015-11-18 00:00:00',4,7,'7134322356','confirmed',NULL),(35,'mp3950@nyu.edu','mp3950@nyu.edu','pass','Mansi','Patel','2015-12-25 05:43:05','2015-12-25 05:43:05',10,11,NULL,'pending','7310'),(37,'kalidas','kalidas@mailinator.com','password','Kalidas','sddds','2015-12-25 08:30:53','2015-12-25 08:30:53',10,11,NULL,'pending','7310');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -379,4 +379,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-12-25  6:25:17
+-- Dump completed on 2015-12-25 11:56:52
