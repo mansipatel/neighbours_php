@@ -1,7 +1,14 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<?php include "assets.php";?>
+<title>Neighbour Space</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link href="style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="js/jquery-1.3.2.min.js"></script>
+<script type="text/javascript" src="js/script.js"></script>
+<script type="text/javascript" src="js/cufon-yui.js"></script>
+<script type="text/javascript" src="js/arial.js"></script>
+<script type="text/javascript" src="js/cuf_run.js"></script>
 </head>
 <?php
 
@@ -17,9 +24,6 @@ if(!isset($_SESSION['username'])) { //if not yet logged in
 } 
 ?>
 <body>
-<<<<<<< HEAD
-<?php include "header.php"; ?>
-=======
 <div class="main">
   <div class="main_resize">
     <div class="header">
@@ -80,12 +84,11 @@ if(!isset($_SESSION['username'])) { //if not yet logged in
   </div>
 
 </div>
->>>>>>> 0f0252de3c5993d4dcd84bdbe06c502b6c1c1055
 
 <?php
 echo '<form method  ="post">';
-if ($stmt = $mysqli->prepare("select m.msg_title , m.msg_text , u.first_name , m.msg_time  from neighbours.messages  m ,  neighbours.users u , neighbours.message_recipients r where  u.id = m.msg_by  and r.recipient_type = 'N' group by m.id ")) 
-	
+if ($stmt = $mysqli->prepare("select m.msg_title , m.msg_text , u.first_name , m.msg_time  from neighbours.messages  m ,  neighbours.users u , neighbours.message_recipients r where  u.id = m.msg_by  and r.recipient_type = 'B' group by m.id ")) 
+	/*To ensure only members of that block can view the requests made by people wishing to join that block */
 {
 		$stmt->execute();
 		$stmt->bind_result($msg_title , $msg_text , $first_name , $msg_time );

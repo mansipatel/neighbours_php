@@ -424,6 +424,10 @@ display:block;
 		border-width: 1px;
 		border-color: #000099;
 		border-collapse: collapse;
+		width: 70%;
+   		margin-left: auto;
+    	margin-right: auto;
+
 	}
 	.table-style-three th {
 		border-width: 1px;

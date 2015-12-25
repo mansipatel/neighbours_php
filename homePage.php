@@ -5,8 +5,27 @@
 </head>
 
 <?php
-$_SESSION['username'] = 'adm';
 include "connectdb.php";
+include "include.php";
+if(isset($_SESSION['email']))
+{
+	$email = $_SESSION['email'];
+}
+
+if ($stmt = $mysqli->prepare("select u.first_name , u.id from neighbours.users u where u.email = '$email'")) {
+  $stmt->execute();
+  $stmt->bind_result( $first_name , $userId );
+  if($stmt != null)
+  {
+	  while($stmt->fetch()) { 
+	  $_SESSION['userId'] = $userId;
+	  $_SESSION['firstName'] = $first_name;
+	  
+	  }
+  }
+   $stmt->close();
+}
+$_SESSION['username'] = 'adm';
 if(empty($_SESSION)) // if the session not yet started 
    session_start();
 
@@ -33,7 +52,7 @@ if(!isset($_SESSION['username'])) { //if not yet logged in
         <div class="clr"></div>
       </div>
 	  <div class = "message">
-		  <b>Welcome  <?php echo $_SESSION['username']; ?></b>
+		  <b>Welcome  <?php echo $_SESSION['firstName']; ?></b>
 		  </div>
       <div class="menu_nav">
 
