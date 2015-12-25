@@ -24,6 +24,15 @@ $userId = $_SESSION['userId'];
 $profile_desc = $_POST['profile_desc'];
 $image = $_POST['image']'
 
+$target_dir  = "images/profile_images/";
+$target_file = $target_dir . $userId . ".jpg";
+
+$uploadOk = 1;
+move_uploaded_file($FILES(["image"]["tmp_name"], $target_file)
+
+//save profile_desc
+$query = "Insert into neighbours.profiles(user_id, profile_desc) values(" . $userId . ", '" . $profile_desc . "')";
+$mysqli->query($query);
 
 }
 ?>

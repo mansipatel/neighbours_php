@@ -29,7 +29,7 @@
             <ul class="sb_menu">
               <li <?php if($active_link=="homePage") echo "class=active"; ?> <a href="homePage.php">Home</a></li>
               <li <?php if($active_link=="friend_list") echo "class=active"; ?>><a href="friend_list.php">Friends</a></li>
-              <li <?php if($active_link=="neighbours") echo "class=active"; ?>><a href="#">Neighbours</a></li>
+              <li <?php if($active_link=="neighbour_list") echo "class=active"; ?>><a href="neighbour_list.php">Neighbours</a></li>
               <li <?php if($active_link=="friend_req") echo "class=active"; ?>><a href="friend_req.php">Pending Friend Requests</a></li>
               <li <?php if($active_link=="block_requests") echo "class=active"; ?>><a href="block_requests.php">Block Requests</a></li>
               <li <?php if($active_link=="messages") echo "class=active"; ?>><a href="messages.php">Feeds</a></li>

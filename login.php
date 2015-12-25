@@ -61,8 +61,8 @@ echo $hood_id . ';'. $block_id;
 			else{
 				echo "Execute failed: (" . $stmt->errno . ") " . $stmt->error;
 			}
-				// header('Location: homePage.php');
-				// 	exit;
+				header('Location: homePage.php');
+					exit;
      	}
      	else
      	{
