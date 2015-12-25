@@ -11,27 +11,10 @@
 <script type="text/javascript" src="js/cuf_run.js"></script>
 </head>
 <?php
-include "connectdb.php";
-include "include.php";
-if(isset($_SESSION['email']))
-{
-	$email = $_SESSION['email'];
-}
 
-if ($stmt = $mysqli->prepare("select u.first_name , u.id from neighbours.users u where u.email = '$email'")) {
-  $stmt->execute();
-  $stmt->bind_result( $first_name , $userId );
-  if($stmt != null)
-  {
-	  while($stmt->fetch()) { 
-	  $_SESSION['userId'] = $userId;
-	  $_SESSION['firstName'] = $first_name;
-	  
-	  }
-  }
-   $stmt->close();
-}
-$_SESSION['username'] = 'adm';
+include "include.php";
+include "connectdb.php";
+$userId = $_SESSION['userId'];
 if(empty($_SESSION)) // if the session not yet started 
    session_start();
 
@@ -47,16 +30,8 @@ if(!isset($_SESSION['username'])) { //if not yet logged in
       <div class="logo">
         <h1><a href="#"><span>Neighbour </span>  Space<small>  Share & Care</small></a></h1>
       </div>
-      <div class="search">
-        <form method="get" id="search" action="#">
-          <span>
-          <input type="text" value="Search..." name="s" id="s" />
-          <input name="searchsubmit" type="image" src="images/search.gif" value="Go" id="searchsubmit" class="btn"  />
-          </span>
-        </form>
-        <!--/searchform -->
-        <div class="clr"></div>
-      </div>
+     
+	 
 	  <div class = "message">
 		  <b>Welcome  <?php echo $_SESSION['firstName']; ?></b>
 		  </div>
@@ -70,8 +45,16 @@ if(!isset($_SESSION['username'])) { //if not yet logged in
 		
         <div class="clr"></div>
       </div>
-	  
-      <div class="hbg"><img src="images/header_images.jpg" width="923" height="291" alt="" /></div>
+	   
+		
+		<div id="roundbar-blue">
+	<ul>
+		<li class="first"><a style="color:white" href="personalFeed.php">Personal Feeds</a></li>
+		<li class="active"><a style="color:white" href="neighbourFeed.php">Neighbourhood Feeds</a></li>
+		<li class="last"><a style="color:white" href="blockFeed.php">Block Feeds</a></li>
+	</ul> 
+	</div> 
+	 </div>
     </div>
     <div class="content">
       <div class="content_bg">
@@ -82,35 +65,60 @@ if(!isset($_SESSION['username'])) { //if not yet logged in
             <h2 class="star"><span>Sidebar</span> Menu</h2>
             <div class="clr"></div>
             <ul class="sb_menu">
-              <li class="active"><a href="#">Home</a></li>
+             <li class="active"><a href="homePage.php">Home</a></li>
               <li><a href="friend_list.php">Friends</a></li>
               <li><a href="#">Neighbours</a></li>
               <li><a href="friend_req.php">Pending Friend Requests</a></li>
               <li><a href="block_requests.php">Block Requests</a></li>
               <li><a href="messages.php">Feeds</a></li>
 			  <li><a href="#">Add Friend</a></li>
-			   <li><a href="#">Add Neighbour</a></li>
+			  <li><a href="#">Add Neighbour</a></li>
 			   <li><a href="sendMessage.php">Post Message</a></li>
             </ul>
           </div>
         
         
-        </div>
+  
       </div>
     </div>
   </div>
 
 </div>
-<div class="footer">
-  <div class="footer_resize">
-    <div class="clr"></div>
-  </div>
-</div>
 
-
-
-
-
+<?php
+echo '<form method  ="post">';
+if ($stmt = $mysqli->prepare("select m.msg_title , m.msg_text , u.first_name , m.msg_time  from neighbours.messages  m ,  neighbours.users u , neighbours.message_recipients r where  u.id = m.msg_by  and r.recipient_type = 'B' group by m.id ")) 
+	/*To ensure only members of that block can view the requests made by people wishing to join that block */
+{
+		$stmt->execute();
+		$stmt->bind_result($msg_title , $msg_text , $first_name , $msg_time );
+		if($stmt != null)
+		{
+		$stmt->store_result();
+			if( $stmt->num_rows > 0)
+			{	echo '</br>';
+				echo '</br>';
+				echo '</br>';
+				echo '</br>';
+				echo "<div class='table-style-three'><table>
+					<thead><tr><th>Message Title</th><th>Message Text</th><th>Posted By</th><th>Posted Date</th></tr></thead>";
+			}
+			while($stmt->fetch()) 
+			{
+			echo '<hd>';
+			echo '</hd>';
+			echo "<tr><td> <a href = 'messageThread.php'>$msg_title</a> </td><td>$msg_text </td><td> $first_name </td><td> $msg_time</td>
+			</tr>";
+				
+			}
+			echo "</table></div>";			
+		}
+		  else
+		{
+		"There is some sql error encountered in status query";
+		}
+		$stmt->close();
+}
+?>
 </body>
-
 </html>

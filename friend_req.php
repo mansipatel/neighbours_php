@@ -11,11 +11,10 @@
 <script type="text/javascript" src="js/cuf_run.js"></script>
 </head>
 <?php
-$_SESSION['username'] = 'adm';
-$_SESSION['userid'] = 6;
-$userId = $_SESSION['userid'];
-$userId = 6;
+include "include.php";
 include "connectdb.php";
+$userId = $_SESSION['userId'];
+
 if(empty($_SESSION)) // if the session not yet started 
    session_start();
 
@@ -34,7 +33,7 @@ if(!isset($_SESSION['username'])) { //if not yet logged in
      
 	 
 	  <div class = "message">
-		  <b>Welcome  <?php echo $_SESSION['username']; ?></b>
+		  <b>Welcome  <?php echo $_SESSION['firstName']; ?></b>
 		  </div>
       <div class="menu_nav">
 
@@ -89,7 +88,7 @@ $sender_id = 0;
 echo '<form method  ="post">';
 $requests = "";
 if ($stmt = $mysqli->prepare("select u.first_name , u.last_name , n.hood_address , b.block_address , fr.sender_id  from neighbours.users u , neighbours.friend_requests fr , neighbours.neighbourhoods  n , neighbours.blocks b 
-where fr.sender_id = u.id  and u.hood_id = n.id and u.block_id = b.id and fr.user_id = '6' and fr.status = 'pending';")) {
+where fr.sender_id = u.id  and u.hood_id = n.id and u.block_id = b.id and fr.user_id = '$userId' and fr.status = 'pending';")) {
   $stmt->execute();
   $stmt->bind_result( $first_name , $last_name , $hood_address , $block_address , $sender_id);
   if($stmt != null)
@@ -144,16 +143,16 @@ else
 if(isset($_POST['Accept']))
 { 
 		echo $sender_id;
-		$result=$mysqli->prepare('CALL neighbours.accept_friend_request("6" , ? , "accepted" ,@return_bit)'); 
-		$result->bind_param("i", $sender_id);
+		$result=$mysqli->prepare('CALL neighbours.accept_friend_request(? , ? , "accepted" ,@return_bit)'); 
+		$result->bind_param("ii",$userId , $sender_id);
 		$result->execute();
 		echo '<script> alert("Success"); </script>';
 }
 if(isset($_POST['Reject']))
 { 
 		echo $sender_id;
-		$result=$mysqli->prepare('CALL neighbours.decline_friend_request("6" , ? , "rejected" ,@return_bit)'); 
-		$result->bind_param("i", $sender_id);
+		$result=$mysqli->prepare('CALL neighbours.decline_friend_request(? , ? , "rejected" ,@return_bit)'); 
+		$result->bind_param("ii",$userId , $sender_id);
 		$result->execute();
 		echo '<script> alert("Success"); </script>';
 }

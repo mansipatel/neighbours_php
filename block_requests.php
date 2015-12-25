@@ -11,11 +11,10 @@
 <script type="text/javascript" src="js/cuf_run.js"></script>
 </head>
 <?php
-$_SESSION['username'] = 'adm';
-$_SESSION['userid'] = 13;
-$userId = $_SESSION['userid'];
-$userId = 13;	
+
+include "include.php";	
 include "connectdb.php";
+$userId = $_SESSION['userId'];
 if(empty($_SESSION)) // if the session not yet started 
    session_start();
 
@@ -34,7 +33,7 @@ if(!isset($_SESSION['username'])) { //if not yet logged in
      
 	 
 	  <div class = "message">
-		  <b>Welcome  <?php echo $_SESSION['username']; ?></b>
+		  <b>Welcome  <?php echo $_SESSION['firstName']; ?></b>
 		  </div>
       <div class="menu_nav">
 
@@ -79,10 +78,9 @@ if(!isset($_SESSION['username'])) { //if not yet logged in
 
 <?php
 $sender_id = 0;
-$user_id = 13;// Need to Change
 echo '<form method  ="post">';
 $requests = "";
-if ($stmt = $mysqli->prepare("select u.status , u.block_id from neighbours.users u where u.id = '13'")) 
+if ($stmt = $mysqli->prepare("select u.status , u.block_id from neighbours.users u where u.id = '$userId'")) 
 	/*To ensure only members of that block can view the requests made by people wishing to join that block */
 {
 		$stmt->execute();
@@ -111,7 +109,7 @@ if ($stmt = $mysqli->prepare("select u.status , u.block_id from neighbours.users
 												AND u.hood_id = n.id
 												AND u.block_id = b.id
 												AND u.block_id = '$block_id'
-												AND NOT EXISTS (select br.approver_id from  neighbours.block_requests br where br.approver_id = '$user_id' and br.requester_id = u.id)"))
+												AND NOT EXISTS (select br.approver_id from  neighbours.block_requests br where br.approver_id = '$userId' and br.requester_id = u.id)"))
 					{
 					$stmt2->execute();
 					$stmt2->bind_result( $first_name , $last_name , $hood_address , $block_address , $sender_id);
@@ -154,7 +152,7 @@ if ($stmt = $mysqli->prepare("select u.status , u.block_id from neighbours.users
 				{
 				$query = "insert into  neighbours.block_requests ( approver_id ,requester_id ) values (?,?)";
 				$stmt = $mysqli->prepare($query);
-				$stmt->bind_param("ii", $user_id , $sender_id);
+				$stmt->bind_param("ii", $userId , $sender_id);
 				if($stmt->execute())
 				$stmt->close();
 				}			

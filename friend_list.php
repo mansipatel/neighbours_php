@@ -11,11 +11,11 @@
 <script type="text/javascript" src="js/cuf_run.js"></script>
 </head>
 <?php
-$_SESSION['username'] = 'adm';
-$_SESSION['userid'] = 6;
-$userId = $_SESSION['userid'];
-$userId = 6;	
+
+
+include "include.php";	
 include "connectdb.php";
+$userId = $_SESSION['userId'];
 if(empty($_SESSION)) // if the session not yet started 
    session_start();
 
@@ -34,7 +34,7 @@ if(!isset($_SESSION['username'])) { //if not yet logged in
      
 	 
 	  <div class = "message">
-		  <b>Welcome  <?php echo $_SESSION['username']; ?></b>
+		  <b>Welcome  <?php echo $_SESSION['firstName']; ?></b>
 		  </div>
       <div class="menu_nav">
 
@@ -82,7 +82,7 @@ $sender_id = 0;
 echo '<form method  ="post">';
 $requests = "";
 if ($stmt = $mysqli->prepare("select u.first_name , u.last_name , n.hood_address , b.block_address from neighbours.users u , neighbours.friends fr , neighbours.neighbourhoods  n , neighbours.blocks b 
-where fr.user_id = '6' and fr.friend_id = u.id  and u.hood_id = n.id and u.block_id = b.id ")) {
+where fr.user_id = '$userId' and fr.friend_id = u.id  and u.hood_id = n.id and u.block_id = b.id ")) {
   $stmt->execute();
   $stmt->bind_result( $first_name , $last_name , $hood_address , $block_address );
   if($stmt != null)

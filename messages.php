@@ -11,11 +11,10 @@
 <script type="text/javascript" src="js/cuf_run.js"></script>
 </head>
 <?php
-$_SESSION['username'] = 'adm';
-$_SESSION['userid'] = 6;
-$userId = $_SESSION['userid'];
-$userId = 6;
+
+include "include.php";
 include "connectdb.php";
+$userId = $_SESSION['userId'];
 if(empty($_SESSION)) // if the session not yet started 
    session_start();
 
@@ -34,7 +33,7 @@ if(!isset($_SESSION['username'])) { //if not yet logged in
      
 	 
 	  <div class = "message">
-		  <b>Welcome  <?php echo $_SESSION['username']; ?></b>
+		  <b>Welcome  <?php echo $_SESSION['firstName']; ?></b>
 		  </div>
       <div class="menu_nav">
 
