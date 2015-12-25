@@ -20,7 +20,8 @@
 	     	$input_zip = $_POST["zip"];
 	     	$creation_date = date('Y-m-d H:i:s');
 	     	$last_login = date('Y-m-d H:i:s');
-	     	$block_id = null;
+	     	$status = "pending";
+	     	
 
 // getting hood id
 	     	$stmt1 = $mysqli->prepare('select id from neighbours.neighbourhoods 
@@ -39,19 +40,20 @@
 	     	if($stmt2) 
      		{
   				$stmt2->execute();
-			  	$stmt2->bind_result($hood_id);
+			  	$stmt2->bind_result($block_id);
 			  	$stmt2->store_result();
 			  	$stmt2->fetch();
 			 }
-			 
+echo $hood_id . ';'. $block_id;
+
      		$query = "insert into  neighbours.users(username ,email, password, first_name,
-     			 last_name,creation_date,last_login_time, hood_id, status, zip)
-     		 values (?,?,?,?,?,?,?,?,?,?)";
+     			 last_name,creation_date,last_login_time, hood_id, block_id, status, zip)
+     		 values (?,?,?,?,?,?,?,?,?,?,?)";
      		// echo $query;
 			$stmt = $mysqli->prepare($query);
-			$stmt->bind_param("sssssiiiii", $input_username , $input_email, $input_pass, 
+			$stmt->bind_param("sssssssiisi", $input_username , $input_email, $input_pass, 
 					$input_firstname, $input_lastname, $creation_date, $last_login,
-					 $hood_id, $block_id, $input_zip);
+					 $hood_id, $block_id, $status,$input_zip);
 			
 			if($stmt->execute()){
 				$stmt->close();
