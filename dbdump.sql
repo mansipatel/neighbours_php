@@ -25,11 +25,11 @@ DROP TABLE IF EXISTS `block_requests`;
 CREATE TABLE `block_requests` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `requester_id` int(11) unsigned NOT NULL,
-  `approver1_id` int(11) unsigned DEFAULT NULL,
-  `approver2_id` int(11) unsigned DEFAULT NULL,
-  `approver3_id` int(11) unsigned DEFAULT NULL,
+  `approver_id` int(11) unsigned DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `block_requests_ibfk_1` (`requester_id`),
+  KEY `FK_block_req_app` (`approver_id`),
+  CONSTRAINT `FK_block_req_app` FOREIGN KEY (`approver_id`) REFERENCES `users` (`id`),
   CONSTRAINT `block_requests_ibfk_1` FOREIGN KEY (`requester_id`) REFERENCES `users` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -40,7 +40,7 @@ CREATE TABLE `block_requests` (
 
 LOCK TABLES `block_requests` WRITE;
 /*!40000 ALTER TABLE `block_requests` DISABLE KEYS */;
-INSERT INTO `block_requests` VALUES (10,9,5,NULL,NULL),(11,6,7,NULL,NULL);
+INSERT INTO `block_requests` VALUES (10,9,NULL),(11,6,NULL);
 /*!40000 ALTER TABLE `block_requests` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -72,6 +72,35 @@ INSERT INTO `blocks` VALUES (1,'34th Street Herald Square',1),(2,'Skyscraper Mus
 UNLOCK TABLES;
 
 --
+-- Table structure for table `friend_requests`
+--
+
+DROP TABLE IF EXISTS `friend_requests`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `friend_requests` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) unsigned NOT NULL,
+  `sender_id` int(11) unsigned DEFAULT NULL,
+  `status` varchar(30) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `user_id` (`user_id`),
+  KEY `sender_id` (`sender_id`),
+  CONSTRAINT `friend_requests_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
+  CONSTRAINT `friend_requests_ibfk_2` FOREIGN KEY (`sender_id`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `friend_requests`
+--
+
+LOCK TABLES `friend_requests` WRITE;
+/*!40000 ALTER TABLE `friend_requests` DISABLE KEYS */;
+/*!40000 ALTER TABLE `friend_requests` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `friends`
 --
 
@@ -80,15 +109,14 @@ DROP TABLE IF EXISTS `friends`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `friends` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `sender_id` int(11) unsigned NOT NULL,
-  `receiver_id` int(11) unsigned NOT NULL,
-  `status` enum('pending','approved','disabled') DEFAULT NULL,
+  `user_id` int(11) unsigned NOT NULL,
+  `friend_id` int(11) unsigned NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `sender_id` (`sender_id`),
-  KEY `receiver_id` (`receiver_id`),
-  CONSTRAINT `friends_ibfk_1` FOREIGN KEY (`sender_id`) REFERENCES `users` (`id`),
-  CONSTRAINT `friends_ibfk_2` FOREIGN KEY (`receiver_id`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+  KEY `user_id` (`user_id`),
+  KEY `friend_id` (`friend_id`),
+  CONSTRAINT `friends_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
+  CONSTRAINT `friends_ibfk_2` FOREIGN KEY (`friend_id`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -97,7 +125,6 @@ CREATE TABLE `friends` (
 
 LOCK TABLES `friends` WRITE;
 /*!40000 ALTER TABLE `friends` DISABLE KEYS */;
-INSERT INTO `friends` VALUES (1,10,13,'approved'),(2,6,7,'disabled'),(3,8,11,'pending'),(6,10,12,'disabled');
 /*!40000 ALTER TABLE `friends` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -294,6 +321,7 @@ CREATE TABLE `users` (
   `hood_id` int(11) unsigned NOT NULL,
   `block_id` int(11) unsigned NOT NULL,
   `phone_num` varchar(20) DEFAULT NULL,
+  `status` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `hood_id` (`hood_id`),
   KEY `block_id` (`block_id`),
@@ -308,7 +336,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (6,'adm','avani09@gmail.com','Xera123','Avani','Shah','2015-10-10 00:00:00','2015-11-10 00:00:00',2,2,'2011234563'),(7,'mpatel','mpatel08@yahoo.com','UYBn678','Mansi','Patel','2014-10-15 00:00:00','2015-11-17 00:00:00',2,2,'7321234567'),(8,'psekar','ppriyas@gmail.com','hello178','Priya','Sekar','2015-08-13 00:00:00','2015-11-19 00:00:00',3,3,'6178909876'),(9,'cshah','chirag25@gmail.com','TRGy56q','Chirag','Shah','2014-09-10 00:00:00','2015-11-20 00:00:00',4,6,'9187680935'),(10,'mjoe','mark_joe@gmail.com','treAAq','Mark','Jose','2014-12-25 00:00:00','2015-11-12 00:00:00',4,7,'7180982345'),(11,'spatel','sp@mailinator.com','bfjasdfksf','Shivam','Patel','2014-10-15 00:00:00','2015-11-20 00:00:00',3,3,'4586321568'),(12,'zblevins','zoe@mailinator.com','fsafdas@455fds','Zoe','Blevins','2014-10-15 00:00:00','2015-11-12 00:00:00',4,6,'5896321458'),(13,'chays','curtis@mailinator','fdasfa(493489fdsfask','Curtis','Hays','2014-10-15 00:00:00','2015-11-12 00:00:00',4,7,'8652134568');
+INSERT INTO `users` VALUES (6,'adm','avani09@gmail.com','Xera123','Avani','Shah','2015-10-10 00:00:00','2015-11-10 00:00:00',2,2,'2011234563',NULL),(7,'mpatel','mpatel08@yahoo.com','UYBn678','Mansi','Patel','2014-10-15 00:00:00','2015-11-17 00:00:00',2,2,'7321234567',NULL),(8,'psekar','ppriyas@gmail.com','hello178','Priya','Sekar','2015-08-13 00:00:00','2015-11-19 00:00:00',3,3,'6178909876',NULL),(9,'cshah','chirag25@gmail.com','TRGy56q','Chirag','Shah','2014-09-10 00:00:00','2015-11-20 00:00:00',4,6,'9187680935',NULL),(10,'mjoe','mark_joe@gmail.com','treAAq','Mark','Jose','2014-12-25 00:00:00','2015-11-12 00:00:00',4,7,'7180982345',NULL),(11,'spatel','sp@mailinator.com','bfjasdfksf','Shivam','Patel','2014-10-15 00:00:00','2015-11-20 00:00:00',3,3,'4586321568',NULL),(12,'zblevins','zoe@mailinator.com','fsafdas@455fds','Zoe','Blevins','2014-10-15 00:00:00','2015-11-12 00:00:00',4,6,'5896321458',NULL),(13,'chays','curtis@mailinator','fdasfa(493489fdsfask','Curtis','Hays','2014-10-15 00:00:00','2015-11-12 00:00:00',4,7,'8652134568',NULL);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -321,4 +349,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-12-11  0:05:54
+-- Dump completed on 2015-12-25  1:09:10

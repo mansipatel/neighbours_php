@@ -3,38 +3,35 @@
      
     	session_start();
      	include "connectdb.php";
+     	include "include.php";
     ?>
 
   	<?php
     	$_SESSION['email'] = $_POST["email"];
      	
+     	$input_email = $_POST["email"];
+     	$input_pass = $_POST["password"];
+     	$input_firstname = $_POST["first_name"];
+     	$input_lastname = $_POST["last_name"];
+     	$input_username = $_POST["username"];
+     	$input_zip = $_POST["zip"];
+     	$creation_date = date('Y-m-d H:i:s');
      	if (isset($_POST['first_name'])){
      		// echo $_POST['email'];
-     		echo '<form action="upload.php" method="post" enctype="multipart/form-data">
-    				Select image to upload:
-    				<input type="file" name="fileToUpload" id="fileToUpload">
-    				<input type="submit" value="Upload Image" name="submit">
-					</form>';
-			$target_dir = "uploads/";
-			$target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
-			$uploadOk = 1;
-			$imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
-			// Check if image file is a actual image or fake image
-			if(isset($_POST["submit"])) {
-			    $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
-			    if($check !== false) {
-			        echo "File is an image - " . $check["mime"] . ".";
-			        $uploadOk = 1;
-			    } else {
-			        echo "File is not an image.";
-			        $uploadOk = 0;
-			    }
-			}
+     		$input_zip = $_POST["zip"];
+     		$query = "insert into  neighbours.users(username ,email, password, first_name, last_name,creation_date,zip)
+     		 values (?,?,?,?,?,?,?)";
+				$stmt = $mysqli->prepare($query);
+				$stmt->bind_param("vii", $input_username , $input_email, $input_pass, 
+					$input_firstname, $input_lastname, $creation_date, $input_zip);
+				if($stmt->execute())
+				$stmt->close();
+				header('Location: homePage.php');
+					exit;
      	}
      	else
      	{
-     		$input_email = $_POST["email"];
-     		$input_pass = $_POST["password"];
+     
      		// echo $input_email;
      		// echo $input_pass;
      		//$query = 'select * from neighbours.users where email= "mpatel08@yahoo.com" and password="UYBn678"';
