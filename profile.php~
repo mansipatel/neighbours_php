@@ -11,8 +11,8 @@ include "connectdb.php";
 $active_link="friends";
 
 if(!isset($_SESSION['username'])) { //if not yet logged in
-//   header("Location: login.php");// send to login page
-//   exit;
+  header("Location: login.php");// send to login page
+exit;
 } 
 ?>
 <body>
@@ -22,16 +22,16 @@ if(!isset($_SESSION['username'])) { //if not yet logged in
 if($_POST['profile_desc']){ // form is POSTed, save fields
 $userId = $_SESSION['userId'];
 $profile_desc = $_POST['profile_desc'];
-$image = $_POST['image']'
+$image = $_POST['image'];
 
 $target_dir  = "images/profile_images/";
 $target_file = $target_dir . $userId . ".jpg";
 
 $uploadOk = 1;
-move_uploaded_file($FILES(["image"]["tmp_name"], $target_file)
+move_uploaded_file($_FILES["image"]["tmp_name"], $target_file);
 
 //save profile_desc
-$query = "Insert into neighbours.profiles(user_id, profile_desc) values(" . $userId . ", '" . $profile_desc . "')";
+$query = "Insert into neighbours.profiles(user_id, profile_desc) values(" . $userId . ", \'" . mysql_real_escape_string($profile_desc) . "\')";
 $mysqli->query($query);
 
 }
@@ -44,7 +44,7 @@ $mysqli->query($query);
 <br/>
 <form>
 <h3>About Me</h3>
-<textarea name='profile_desc' rows='4' cols='40'></textarea>
+<textarea name=profile_desc rows=4 cols=40></textarea>
 <br />
 <h3>Profile Picture</h3>
 <input type="file" name="image" id="image" />

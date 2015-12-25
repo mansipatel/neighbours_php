@@ -23,6 +23,9 @@ html {
 	padding:0;
 	margin:0 auto;
 }
+.profile-image{
+    background:#fff url(img/colt-sidebar.jpg) no-repeat top right;
+}
 h1 {
 	margin:0;
 	padding:20px 0 0 0;

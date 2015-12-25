@@ -20,6 +20,7 @@ if(!isset($_SESSION['username'])) { //if not yet logged in
    exit;
 } 
 ?>
+
 <body>
 <?php include "header.php"; 
 $active_link="neihgbour_list";?>

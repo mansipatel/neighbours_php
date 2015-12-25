@@ -33,7 +33,7 @@ where fr.sender_id = u.id  and u.hood_id = n.id and u.block_id = b.id and fr.use
   {
 	 echo '</br>';
 	 echo '</br>';
-		 
+        $stmt->store_result();		 
 	if($stmt->num_rows == 0)
 	{
 	echo '<hd>';
@@ -49,7 +49,7 @@ where fr.sender_id = u.id  and u.hood_id = n.id and u.block_id = b.id and fr.use
 	echo '</br>';
 	echo '</br>';
 	
-	echo "<table class='table table-striped table-bordered table-condensed'>
+	echo "<table class='table table-striped table-bordered table-condensed' style='width: 500px;'>
 <thead><tr><th>Name</th><th>Profile</th><th>Neighbourhood</th><th>Block</th><th>Accept</th><th>Reject</th></tr></thead>";
 }
 while($stmt->fetch()) {

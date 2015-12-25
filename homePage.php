@@ -36,7 +36,11 @@ if(!isset($_SESSION['username'])) { //if not yet logged in
 } 
 ?>
 <body>
-<div class="main">
+<?php 
+$active_link = "homePage";
+include "header.php"; 
+?>
+<!-- <div class="main">
   <div class="main_resize">
     <div class="header">
       <div class="logo">
@@ -59,15 +63,13 @@ if(!isset($_SESSION['username'])) { //if not yet logged in
 
         <ul>
 		
-          <li><a href="index.html">Profile</a></li>
+          <li><a href="profile.php">Profile</a></li>
 		  <li> <a href="logout.php">Logout</a></li>
         </ul>
 		
         <div class="clr"></div>
       </div>
-	  
-      <div class="hbg"><img src="images/header_images.jpg" width="923" height="291" alt="" /></div>
-    </div>
+	  </div>
     <div class="content">
       <div class="content_bg">
         <div class="mainbar">
@@ -79,12 +81,12 @@ if(!isset($_SESSION['username'])) { //if not yet logged in
             <ul class="sb_menu">
               <li class="active"><a href="#">Home</a></li>
               <li><a href="friend_list.php">Friends</a></li>
-              <li><a href="#">Neighbours</a></li>
+              <li><a href="neighbour_list.php">Neighbours</a></li>
               <li><a href="friend_req.php">Pending Friend Requests</a></li>
               <li><a href="block_requests.php">Block Requests</a></li>
               <li><a href="messages.php">Feeds</a></li>
 			  <li><a href="#">Add Friend</a></li>
-			   <li><a href="#">Add Neighbour</a></li>
+			   <li><a href="add_neighbour.php">Add Neighbour</a></li>
 			   <li><a href="sendMessage.php">Post Message</a></li>
             </ul>
           </div>
@@ -101,7 +103,7 @@ if(!isset($_SESSION['username'])) { //if not yet logged in
     <div class="clr"></div>
   </div>
 </div>
-
+ -->
 
 
 

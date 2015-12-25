@@ -22,19 +22,25 @@
       <div class="content_bg">
         <div class="mainbar">
         </div>
-        <div class="sidebar">
+        <div class="sidebar" style="height: 1100px;">
+	  <?php
+	     $userId = $_SESSION['userId'];
+	     $filename = "images/profile_images/" . $userId . ".jpg";
+	     if (file_exists($filename)){
+	     echo "<div class=image-container><img src='" . $filename . "' class=profile-image></div>";
+	     }
+	     ?>
           <div class="gadget">
-            <h2 class="star"><span>Sidebar</span> Menu</h2>
             <div class="clr"></div>
             <ul class="sb_menu">
-              <li <?php if($active_link=="homePage") echo "class=active"; ?> <a href="homePage.php">Home</a></li>
+              <li <?php if($active_link=="homePage") echo "class=active"; ?>> <a href="homePage.php">Home</a></li>
               <li <?php if($active_link=="friend_list") echo "class=active"; ?>><a href="friend_list.php">Friends</a></li>
               <li <?php if($active_link=="neighbour_list") echo "class=active"; ?>><a href="neighbour_list.php">Neighbours</a></li>
               <li <?php if($active_link=="friend_req") echo "class=active"; ?>><a href="friend_req.php">Pending Friend Requests</a></li>
               <li <?php if($active_link=="block_requests") echo "class=active"; ?>><a href="block_requests.php">Block Requests</a></li>
               <li <?php if($active_link=="messages") echo "class=active"; ?>><a href="messages.php">Feeds</a></li>
 	      <li <?php if($active_link=="add_friend") echo "class=active"; ?>><a href="#">Add Friend</a></li>
-	      <li <?php if($active_link=="add_neighbour") echo "class=active"; ?>><a href="#">Add Neighbour</a></li>
+	      <li <?php if($active_link=="add_neighbour") echo "class=active"; ?>><a href="add_neighbour.php">Add Neighbour</a></li>
 	      <li <?php if($active_link=="sendMessage") echo "class=active"; ?>><a href="sendMessage.php">Post Message</a></li>
             </ul>
           </div>
