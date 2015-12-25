@@ -48,19 +48,42 @@ h2 {
 	margin:0;
 	color:#595959;
 }
-hd {
-	padding:0 10px;
-	font:bold 16px/1.2em Arial, Helvetica, sans-serif;
+hd{
+	font:bold 18px/1.2em Arial, Helvetica, sans-serif;
 	letter-spacing:normal;
-	color:#78bbe6;
+	text-align: right;
+	color:#380B61;
+	
 }
+.topic{
+	font:bold 18px/1.2em Arial, Helvetica, sans-serif;
+	letter-spacing:normal;
+	text-align: right;
+	color:#380B61;
+	margin-left: auto;
+    margin-right: auto;
+	display: flex;
+	align-items: right;
+
+}
+hf{
+	padding:0 10px;
+	font:bold 12px/1.2em Arial, Helvetica, sans-serif;
+	letter-spacing:normal;
+	color:#380B61;
+}
+
 p {
 	margin:8px 0;
 	padding:0 0 8px 0;
 	font:normal 12px/1.8em Arial, Helvetica, sans-serif;
 }
-p.spec {
+ 
+p.padding {
+    padding-right: 4cm;
 }
+
+
 a {
 	color:#97c950;
 	text-decoration:underline;
@@ -462,7 +485,72 @@ width:80px;
 	
  .datagrid table { border-collapse: collapse; text-align: left; width: 100%; } .datagrid {font: normal 12px/150% Arial, Helvetica, sans-serif; background: #fff; overflow: hidden; border: 1px solid #006699; -webkit-border-radius: 3px; -moz-border-radius: 3px; border-radius: 3px; }.datagrid table td, .datagrid table th { padding: 3px 10px; }.datagrid table thead th {background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #006699), color-stop(1, #00557F) );background:-moz-linear-gradient( center top, #006699 5%, #00557F 100% );filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#006699', endColorstr='#00557F');background-color:#006699; color:#FFFFFF; font-size: 15px; font-weight: bold; border-left: 1px solid #0070A8; } .datagrid table thead th:first-child { border: none; }.datagrid table tbody td { color: #00496B; border-left: 1px solid #E1EEF4;font-size: 12px;font-weight: normal; }.datagrid table tbody .alt td { background: #E1EEF4; color: #00496B; }.datagrid table tbody td:first-child { border-left: none; }.datagrid table tbody tr:last-child td { border-bottom: none; }.datagrid table tfoot td div { border-top: 1px solid #006699;background: #E1EEF4;} .datagrid table tfoot td { padding: 0; font-size: 12px } .datagrid table tfoot td div{ padding: 2px; }.datagrid table tfoot td ul { margin: 0; padding:0; list-style: none; text-align: right; }.datagrid table tfoot  li { display: inline; }.datagrid table tfoot li a { text-decoration: none; display: inline-block;  padding: 2px 8px; margin: 1px;color: #FFFFFF;border: 1px solid #006699;-webkit-border-radius: 3px; -moz-border-radius: 3px; border-radius: 3px; background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #006699), color-stop(1, #00557F) );background:-moz-linear-gradient( center top, #006699 5%, #00557F 100% );filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#006699', endColorstr='#00557F');background-color:#006699; }.datagrid table tfoot ul.active, .datagrid table tfoot ul a:hover { text-decoration: none;border-color: #006699; color: #FFFFFF; background: none; background-color:#00557F;}div.dhtmlx_window_active, div.dhx_modal_cover_dv { position: fixed !important; }
  
- 
+ #roundbar-blue {
+ border-radius: 15px;
+		clear:left;
+		float:left;
+		width:100%;
+		padding:5px 5px;
+		background:#338AC4 url(roundbar-blue.gif) 0 27% repeat;
+		font:	font:normal 12px/1.8em Arial, Helvetica, sans-serif;
+		border-bottom:1px solid #49A9FF;
+		overflow:hidden;
+		
+	}
+	#roundbar-blue ul {
+	border-radius: 15px;
+		clear:left;
+		float:left;
+		list-style:none;
+		margin:0;
+		padding:0;
+		position:relative;
+		left:50%;
+		text-align:center;
+	}
+	#roundbar-blue ul li {
+		display:block;
+		float:left;
+		list-style:none;
+		margin:0;
+		padding:0;
+		position:relative;
+		right:50%;
+	
+	}
+	#roundbar-blue ul li:hover , ul li:active , ul li:last , ul li:first{
+   background:#FFF;
+	color:#FFF;
+	}
+	#roundbar-blue ul li.first {
+		border-left:1px solid #49A9FF;
+		color:#000;
+	}
+	#roundbar-blue ul li.last {
+		border-right:1px solid #99D8FF;
+	}
+	#roundbar-blue ul li a {
+		display:block;
+		margin:0;
+		padding:.4em .8em;
+		color:#000;
+		text-decoration:none;
+		border-left:1px solid #99D8FF;
+		border-right:1px solid #49A9FF;
+		line-height:1.3em;
+	}
+	#roundbar-blue ul li.active a {
+		background:url(roundbar-blue.gif) 0 77% repeat;
+		font-weight:bold;
+	}
+	#roundbar-blue ul li a:hover {
+		background:url(roundbar-blue.gif) 0 77% repeat;
+	}
+	#roundbar-blue ul li a span {
+		display:block;
+	}
+	
+	
  
  
  

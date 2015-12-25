@@ -14,7 +14,7 @@
 $_SESSION['username'] = 'adm';
 $_SESSION['userid'] = 6;
 $userId = $_SESSION['userid'];
-$userId = 6;	
+$userId = 6;
 include "connectdb.php";
 if(empty($_SESSION)) // if the session not yet started 
    session_start();
@@ -46,7 +46,16 @@ if(!isset($_SESSION['username'])) { //if not yet logged in
 		
         <div class="clr"></div>
       </div>
-	  
+	   
+		
+		<div id="roundbar-blue">
+	<ul>
+		<li class="first"><a style="color:white" href="personalFeed.php">Personal Feeds</a></li>
+		<li class="active"><a style="color:white" href="neighbourFeed.php">Neighbourhood Feeds</a></li>
+		<li class="last"><a style="color:white" href="blockFeed.php">Block Feeds</a></li>
+	</ul> 
+	</div> 
+	 </div>
     </div>
     <div class="content">
       <div class="content_bg">
@@ -57,7 +66,7 @@ if(!isset($_SESSION['username'])) { //if not yet logged in
             <h2 class="star"><span>Sidebar</span> Menu</h2>
             <div class="clr"></div>
             <ul class="sb_menu">
-              <li class="active"><a href="homePage.php">Home</a></li>
+             <li class="active"><a href="homePage.php">Home</a></li>
               <li><a href="friend_list.php">Friends</a></li>
               <li><a href="#">Neighbours</a></li>
               <li><a href="friend_req.php">Pending Friend Requests</a></li>
@@ -70,55 +79,13 @@ if(!isset($_SESSION['username'])) { //if not yet logged in
           </div>
         
         
-        </div>
+  
       </div>
     </div>
   </div>
 
 </div>
 
-<?php
-$sender_id = 0;
-echo '<form method  ="post">';
-$requests = "";
-if ($stmt = $mysqli->prepare("select u.first_name , u.last_name , n.hood_address , b.block_address from neighbours.users u , neighbours.friends fr , neighbours.neighbourhoods  n , neighbours.blocks b 
-where fr.user_id = '6' and fr.friend_id = u.id  and u.hood_id = n.id and u.block_id = b.id ")) {
-  $stmt->execute();
-  $stmt->bind_result( $first_name , $last_name , $hood_address , $block_address );
-  if($stmt != null)
-  {
-	 echo '</br>';
-	 echo '</br>';
-		 
-	
-	echo '</br>';
-	echo '</br>';
-	echo '</br>';
-	
-	echo "<div class='table-style-three'><table>
-<thead><tr><th>Name</th><th>Profile</th><th>Neighbourhood</th><th>Block</th></tr></thead>";
-      while($stmt->fetch()) {
-			echo '<hd>';
-			echo '</hd>';
-echo "<tr><td> $first_name  $last_name</td><td>Profile Pic</td><td> $block_address</td><td> $hood_address</td>
-</tr>
-";
 
-  }
-  echo "</table></div>";
-  }	  
-  else
-  {
-	}
-  $stmt->close();
- 
-}
-else
-{
-	echo"There is some sql error encountered";
-}
-
-echo '</form>';
-?>
 </body>
 </html>

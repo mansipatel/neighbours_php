@@ -57,14 +57,15 @@ if(!isset($_SESSION['username'])) { //if not yet logged in
             <h2 class="star"><span>Sidebar</span> Menu</h2>
             <div class="clr"></div>
             <ul class="sb_menu">
-              <li class="active"><a href="homePage.php">Home</a></li>
+             <li class="active"><a href="homePage.php">Home</a></li>
               <li><a href="friend_list.php">Friends</a></li>
               <li><a href="#">Neighbours</a></li>
               <li><a href="friend_req.php">Pending Friend Requests</a></li>
               <li><a href="block_requests.php">Block Requests</a></li>
-              <li><a href="#">Feeds</a></li>
+              <li><a href="messages.php">Feeds</a></li>
 			  <li><a href="#">Add Friend</a></li>
 			  <li><a href="#">Add Neighbour</a></li>
+			   <li><a href="sendMessage.php">Post Message</a></li>
             </ul>
           </div>
         
@@ -88,7 +89,7 @@ $sender_id = 0;
 echo '<form method  ="post">';
 $requests = "";
 if ($stmt = $mysqli->prepare("select u.first_name , u.last_name , n.hood_address , b.block_address , fr.sender_id  from neighbours.users u , neighbours.friend_requests fr , neighbours.neighbourhoods  n , neighbours.blocks b 
-where fr.sender_id = u.id  and u.hood_id = n.id and u.block_id = b.id and fr.user_id = '8' and fr.status = 'pending';")) {
+where fr.sender_id = u.id  and u.hood_id = n.id and u.block_id = b.id and fr.user_id = '6' and fr.status = 'pending';")) {
   $stmt->execute();
   $stmt->bind_result( $first_name , $last_name , $hood_address , $block_address , $sender_id);
   if($stmt != null)

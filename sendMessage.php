@@ -12,9 +12,9 @@
 </head>
 <?php
 $_SESSION['username'] = 'adm';
-$_SESSION['userid'] = 6;
+$_SESSION['userid'] = 13;
 $userId = $_SESSION['userid'];
-$userId = 6;	
+$userId = 13;	
 include "connectdb.php";
 if(empty($_SESSION)) // if the session not yet started 
    session_start();
@@ -76,49 +76,64 @@ if(!isset($_SESSION['username'])) { //if not yet logged in
   </div>
 
 </div>
-
 <?php
-$sender_id = 0;
-echo '<form method  ="post">';
-$requests = "";
-if ($stmt = $mysqli->prepare("select u.first_name , u.last_name , n.hood_address , b.block_address from neighbours.users u , neighbours.friends fr , neighbours.neighbourhoods  n , neighbours.blocks b 
-where fr.user_id = '6' and fr.friend_id = u.id  and u.hood_id = n.id and u.block_id = b.id ")) {
-  $stmt->execute();
-  $stmt->bind_result( $first_name , $last_name , $hood_address , $block_address );
-  if($stmt != null)
-  {
-	 echo '</br>';
-	 echo '</br>';
-		 
-	
-	echo '</br>';
-	echo '</br>';
-	echo '</br>';
-	
-	echo "<div class='table-style-three'><table>
-<thead><tr><th>Name</th><th>Profile</th><th>Neighbourhood</th><th>Block</th></tr></thead>";
-      while($stmt->fetch()) {
-			echo '<hd>';
-			echo '</hd>';
-echo "<tr><td> $first_name  $last_name</td><td>Profile Pic</td><td> $block_address</td><td> $hood_address</td>
+ $message = '';
+ $msgTitle ='';
+ ?>
+ <form method ="post">
+ </br>
+</br>
+
+<div class="topic">Post a Message</div>
+</br>
+</br>
+<hf> 
+<tr><td> Message :</td>
+<td> <textarea name='messageDesc' rows='5' cols='30'></textarea>
+</td>
 </tr>
-";
+</br>
+</br>
+</br>
+<tr><td> Message Type :</td>
+<td><select name="msgType">
+  <option value="C">Custom</option>
+  <option value="N">NeighBourhood</option>
+  <option value="B">Block</option>
+  <option value="F">Friends</option>
+</select></td>
+</tr>
+</br>
+</br>
+<tr>
+<td>Message Title:</td>
+<td> <input type = 'text' name='messageTitle' value = '<?php echo $msgTitle;?>' />
+</td>
+</tr>
+</br>
+</br>
 
-  }
-  echo "</table></div>";
-  }	  
-  else
-  {
+<tr><td> Recipient  Name   </td>
+<td></td>
+</tr>
+
+<td><input type='submit' class= 'btn' align = 'center' name = 'Send' value='Send' /></td>
+
+</hf>
+</p>
+<?php
+	if(isset($_POST['Send']))
+	{	 
+		
+		$msgType = $_POST['msgType'];
+		$msgTitle = $_POST['messageTitle'];
+		$message = $_POST['messageDesc'];
+		$result=$mysqli->prepare('Call neighbours.post_message(? , ? , ? , ? , 0 , @msg_id);'); 
+		$result->bind_param("siss", $message ,$userId , $msgTitle, $msgType);
+		$result->execute();
+		echo '<script> alert("Message Sent Successfully"); </script>';
 	}
-  $stmt->close();
- 
-}
-else
-{
-	echo"There is some sql error encountered";
-}
-
-echo '</form>';
-?>
+ ?>
+</form>
 </body>
 </html>
