@@ -18,9 +18,6 @@ if(!isset($_SESSION['username'])) { //if not yet logged in
 } 
 ?>
 <body>
-<<<<<<< HEAD
-<?php include "header.php"; ?>
-=======
 <div class="main">
   <div class="main_resize">
     <div class="header">
@@ -62,12 +59,12 @@ if(!isset($_SESSION['username'])) { //if not yet logged in
             <h2 class="star"><span>Sidebar</span> Menu</h2>
             <div class="clr"></div>
             <ul class="sb_menu">
-             <li class="active"><a href="homePage.php">Home</a></li>
+             <li ><a href="homePage.php">Home</a></li>
               <li><a href="friend_list.php">Friends</a></li>
               <li><a href="#">Neighbours</a></li>
               <li><a href="friend_req.php">Pending Friend Requests</a></li>
               <li><a href="block_requests.php">Block Requests</a></li>
-              <li><a href="messages.php">Feeds</a></li>
+              <li class="active"><a href="messages.php">Feeds</a></li>
 			  <li><a href="#">Add Friend</a></li>
 			  <li><a href="#">Add Neighbour</a></li>
 			   <li><a href="sendMessage.php">Post Message</a></li>
@@ -81,8 +78,5 @@ if(!isset($_SESSION['username'])) { //if not yet logged in
   </div>
 
 </div>
-
->>>>>>> 0f0252de3c5993d4dcd84bdbe06c502b6c1c1055
-
 </body>
 </html>

@@ -6,6 +6,7 @@
 
 <?php
 include "connectdb.php";
+$active_link="home";
 include "include.php";
 if(isset($_SESSION['email']))
 {

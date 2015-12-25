@@ -8,6 +8,7 @@
 $email = $_SESSION['email'];
 
 include "connectdb.php";
+$active_link="friends";
 
 if(!isset($_SESSION['username'])) { //if not yet logged in
 //   header("Location: login.php");// send to login page
