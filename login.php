@@ -82,8 +82,8 @@ echo $hood_id . ';'. $block_id;
 			  	if($input_email == $email && $input_pass == $password)
 			  		
 			  	{
-
-			  			header('Location: homePage.php');
+	                                $_SESSION['username']='logged_in';
+	                                header('Location: homePage.php');
 					exit;
 			  	}
 				else
