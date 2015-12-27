@@ -26,18 +26,12 @@ include "header.php";
 {
 	$messageId =  $_GET["msgId"];
 }
-if ($stmt = $mysqli->prepare("select m.id , m.msg_text , m.title , m.msg_time , u1.first_name, u2.first_name ,  th.thread_text , th.thread_time from messages  m , threads th , users u1 , users u2 where u1.id = m.msg_by and u2.id = th.thread_by and m.id = th.msg_id group by th.msg_id ")) {
+if ($stmt = $mysqli->prepare("select m.id , m.msg_text , m.msg_title , m.msg_time , u1.first_name from  neighbours.messages m , neighbours.users u1 where u1.id = m.msg_by and m.id = '$messageId' ")) {	
   $stmt->execute();
-  $stmt->bind_result( $msg_id , $msg_text , $msg_title , $msg_time , $msg_posted_by , $thread_posted_by  , $thread_text , $thread_time );
+  $stmt->bind_result( $msg_id , $msg_text , $msg_title , $msg_time , $msg_posted_by );
   if($stmt != null)
   {
 	 echo '</br>';
-	 echo '</br>';
-		 
-	
-	echo '</br>';
-	echo '</br>';
-	echo '</br>';
 	
 	echo "<div class='table-style-three'><table>";
       while($stmt->fetch()) {
@@ -53,8 +47,56 @@ if ($stmt = $mysqli->prepare("select m.id , m.msg_text , m.title , m.msg_time , 
 		echo '</hf>';
   }
   echo "</table></div>";
-  }	
+  }
 }  
+
+if ($stmt = $mysqli->prepare("select th.id , th.thread_text , th.thread_time, u1.first_name from  neighbours.threads th , neighbours.users u1 where u1.id = th.thread_by and th.msg_id = '$messageId' ")) {	
+  $stmt->execute();
+  $stmt->bind_result( $th_id  , $th_text  , $th_time , $th_postedby );
+  if($stmt != null)
+  {
+	 echo '</br>';
+	echo "<div class='table-style-three'><table>";
+      while($stmt->fetch()) {
+			echo '<hf>';
+			echo "<tr><td> Reply Text :</td><td>$th_text</td></tr>
+			</br></br>
+			<tr><td> Reply Time : </td><td> $th_time</td></tr>
+			</br></br>
+			<tr><td> Reply Posted By : </td><td> $th_postedby</td></tr>
+			</br></br>";
+
+		echo '</hf>';
+  }
+  echo "</table></div>";
+  }
+} 
+	 echo '</br>';
+		 
+	
+	echo '</br>'; 
+echo'<form method = "post">';
+echo '<hf>';
+echo "<tr><td>Post a Reply :</td>"; 
+echo "<td> <textarea name='replyDesc' rows='5' cols='30'></textarea></td></tr>";
+echo "<div>";
+echo '<div align = center>';
+echo "<td><input type='submit'  align = 'center' class = 'btn' name = 'Send' value='Send'/></td>";
+echo "</div>";
+echo '</hf>';
+
+if(isset($_POST['Send']))
+	{
+	$result=$mysqli->prepare('CALL neighbours.post_reply(? , ? , ? )'); 
+	$result->bind_param("isi",$messageId , $_POST['replyDesc'] , $userId);
+	$result->execute();
+	$stmt->close();
+	echo '<script> alert("Reply Posted Successfully"); </script>';
+
+	}			
+		
+  
+echo '</form>';
  ?>
 </body>
 </html>
