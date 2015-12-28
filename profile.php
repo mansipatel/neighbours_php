@@ -5,6 +5,7 @@
   </head>
 
   <?php
+include "include.php";
 include "connectdb.php";
 
 $active_link="";
@@ -12,7 +13,7 @@ if(empty($_SESSION)) // if the session not yet started
    session_start();
 
 if(!isset($_SESSION['username'])) { //if not yet logged in
-   header("Location: login.php");// send to login page
+   header("Location: index.html");// send to login page
    exit;
 } 
 
@@ -22,7 +23,7 @@ if(!isset($_SESSION['username'])) { //if not yet logged in
 
     <?php
 $userId = $_SESSION['userId'];
-if($_POST['profile_desc']){ // form is POSTed, save fields
+if(isset($_POST['profile_desc'])){ // form is POSTed, save fields
 $profile_desc = $_POST['profile_desc'];
 
 $target_dir  = "./images/profile_images/";

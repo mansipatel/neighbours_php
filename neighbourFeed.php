@@ -87,11 +87,11 @@ if(!isset($_SESSION['username'])) { //if not yet logged in
 
 <?php
 echo '<form method  ="post">';
-if ($stmt = $mysqli->prepare("select m.msg_title , m.msg_text , u.first_name , m.msg_time  from neighbours.messages  m ,  neighbours.users u , neighbours.message_recipients r where   m.id = r.msg_id   and m.msg_by = u.id  and r.recipient_type = 'N' and r.recipient_id=  (select hood_id from neighbours.users where id = '$userId') ")) 
+if ($stmt = $mysqli->prepare("select m.id , m.msg_title , m.msg_text , u.first_name , m.msg_time  from neighbours.messages  m ,  neighbours.users u , neighbours.message_recipients r where   m.id = r.msg_id   and m.msg_by = u.id  and r.recipient_type = 'N' and r.recipient_id=  (select hood_id from neighbours.users where id = '$userId') ")) 
 	
 {
 		$stmt->execute();
-		$stmt->bind_result($msg_title , $msg_text , $first_name , $msg_time );
+		$stmt->bind_result($msg_id , $msg_title , $msg_text , $first_name , $msg_time );
 		if($stmt != null)
 		{
 		$stmt->store_result();
@@ -107,7 +107,7 @@ if ($stmt = $mysqli->prepare("select m.msg_title , m.msg_text , u.first_name , m
 			{
 			echo '<hd>';
 			echo '</hd>';
-			echo "<tr><td> <a href = 'messageThread.php'>$msg_title</a> </td><td>$msg_text </td><td> $first_name </td><td> $msg_time</td>
+			echo "<tr><td> <a href = 'messageThread.php?msgId=$msg_id'>$msg_title</a> </td><td>$msg_text </td><td> $first_name </td><td> $msg_time</td>
 			</tr>";
 				
 			}

@@ -9,6 +9,7 @@ include "include.php";
 include "connectdb.php";
 $userId = $_SESSION['userId'];
 
+
 if(empty($_SESSION)) // if the session not yet started 
    session_start();
 
@@ -16,7 +17,7 @@ if(!isset($_SESSION['username'])) { //if not yet logged in
    header("Location: index.html");// send to login page
    exit;
 }
-echo $_SESSION['username'];
+//echo $_SESSION['username'];
 ?>
 <body>
 
@@ -44,7 +45,7 @@ if ($stmt = $mysqli->prepare("select DISTINCT(u.id), u.first_name , u.last_name 
 	if($stmt->num_rows == 0)
 	{
 	echo '<hd>';
-	echo "You have no more new neighbours make!!";
+	echo "You have no more new neighbours to make!!";
 	echo '</hd>';
 	}
 	else
@@ -62,7 +63,7 @@ if ($stmt = $mysqli->prepare("select DISTINCT(u.id), u.first_name , u.last_name 
 while($stmt->fetch()) {
 			
 echo "<tr><td> $first_name $last_name</td><td> $hood_address</td>
-<td><input type='submit' class= 'btn' name = 'send' value='Send' id = 'accept.$sender_id' onClick = 'return acceptFriendReq($sender_id);'/></td>";
+<td><input type='submit' class= 'btn' name = 'send' value='Send' id = 'accept.$sender_id' onClick = 'return add_neighbour($userId, $id);'/></td>";
   }
   echo "</table>";
   }	  
