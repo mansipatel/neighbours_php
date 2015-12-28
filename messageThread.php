@@ -33,7 +33,7 @@ if ($stmt = $mysqli->prepare("select m.id , m.msg_text , m.msg_title , m.msg_tim
   {
 	 echo '</br>';
 	
-	echo "<div class='table-style-three'><table>";
+	echo "<div class='table-style-three' align  = center><table>";
       while($stmt->fetch()) {
 			echo '<hf>';
 			echo "<tr><td> Message Text :</td><td>$msg_text</td></tr>
@@ -56,7 +56,7 @@ if ($stmt = $mysqli->prepare("select th.id , th.thread_text , th.thread_time, u1
   if($stmt != null)
   {
 	 echo '</br>';
-	echo "<div class='table-style-three'><table>";
+	echo "<div class='table-style-three' align = center><table>";
       while($stmt->fetch()) {
 			echo '<hf>';
 			echo "<tr><td> Reply Text :</td><td>$th_text</td></tr>
@@ -68,7 +68,7 @@ if ($stmt = $mysqli->prepare("select th.id , th.thread_text , th.thread_time, u1
 
 		echo '</hf>';
   }
-  echo "</table></div>";
+  echo "</table>";
   }
 } 
 	 echo '</br>';
@@ -79,11 +79,9 @@ echo'<form method = "post">';
 echo '<hf>';
 echo "<tr><td>Post a Reply :</td>"; 
 echo "<td> <textarea name='replyDesc' rows='5' cols='30'></textarea></td></tr>";
-echo "<div>";
-echo '<div align = center>';
-echo "<td><input type='submit'  align = 'center' class = 'btn' name = 'Send' value='Send'/></td>";
-echo "</div>";
+echo "<td><input type='submit'  class = 'btn' name = 'Send' value='Send'/></td>";
 echo '</hf>';
+echo "</div>";
 
 if(isset($_POST['Send']))
 	{

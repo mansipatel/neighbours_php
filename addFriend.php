@@ -30,7 +30,7 @@ $sender_id = 0;
 echo '<form method  ="post">';
 $requests = "";
 echo '<div>';
-if ($stmt = $mysqli->prepare("select DISTINCT(u.id), u.first_name , u.last_name , n.hood_address, b.block_address from neighbours.users u, neighbours.neighbourhoods  n,neighbours.blocks b where u.hood_id = n.id and u.block_id = b.id  and u.id not in (select friend_id from neighbours.friends where user_id = '$userId') ;")) {
+if ($stmt = $mysqli->prepare("select DISTINCT(u.id), u.first_name , u.last_name , n.hood_address, b.block_address from neighbours.users u, neighbours.neighbourhoods  n,neighbours.blocks b where u.hood_id = n.id and u.block_id = b.id  and u.id not in (select friend_id from neighbours.friends where user_id = '$userId') and u.id not in (select user_id from neighbours.friend_requests where status = 'pending' and sender_id = '$userId') ;")) {
   $stmt->execute();
   $stmt->bind_result( $id, $first_name , $last_name , $hood_address , $block_address);
   if($stmt != null)
@@ -90,7 +90,7 @@ if(isset($_POST['send']))
 	$result->bind_param("ii",$_POST['radioChk'] , $userId);
 	$result->execute();
 	echo '<script> alert("Friend Request Sent Successfully"); </script>';
-
+	header("Refresh:0");
 	}
 echo '</form>';
 ?>
