@@ -24,14 +24,13 @@ if(!isset($_SESSION['username'])) { //if not yet logged in
 <body>
 <?php include "header.php";?>
 <?php
-	$input_email = $_POST["email"];
 	echo '<form method  ="post">';
 	if ($stmt = $mysqli->prepare("select u.first_name, m.msg_title , m.msg_text , m.msg_time, m.id
 	from neighbours.messages  m ,  neighbours.users u
-	where   m.msg_by = u.id and u.id = '$userId'"))
+	where   m.msg_by = u.id and u.id in (select friend_id from neighbours.friends where user_id = '$userId')"))
 	{
 		$stmt->execute();
-		$stmt->bind_result($msg_id, $msg_title , $msg_text , $first_name , $msg_time);
+		$stmt->bind_result($first_name , $msg_title , $msg_text , $msg_time ,$msg_id);
 		if($stmt != null)
 		{
 		$stmt->store_result();

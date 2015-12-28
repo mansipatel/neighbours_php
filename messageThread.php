@@ -34,15 +34,10 @@ if ($stmt = $mysqli->prepare("select m.id , m.msg_text , m.msg_title , m.msg_tim
 	 echo '</br>';
 	
 	echo "<div class='table-style-three' align  = center><table>";
+	echo "<tr><td> Message Text</td><td> Message Title</td><td> Message Time</td><td> Message Posted By</td></tr>";
       while($stmt->fetch()) {
 			echo '<hf>';
-			echo "<tr><td> Message Text :</td><td>$msg_text</td></tr>
-			</br></br>
-			<tr><td> Message Title : </td><td> $msg_title</td></tr>
-			</br></br>
-			<tr><td> Message Time : </td><td> $msg_time</td></tr>
-			<tr><td> Message Posted By : </td><td> $msg_posted_by</td></tr>
-			</br></br>";
+		echo "<tr><td> $msg_text</td><td> $msg_title</td><td>  $msg_time</td><td> $msg_posted_by</td></tr>";	
 
 		echo '</hf>';
   }
@@ -55,20 +50,17 @@ if ($stmt = $mysqli->prepare("select th.id , th.thread_text , th.thread_time, u1
   $stmt->bind_result( $th_id  , $th_text  , $th_time , $th_postedby );
   if($stmt != null)
   {
-	 echo '</br>';
-	echo "<div class='table-style-three' align = center><table>";
+	echo "<div class='table-style-three' align  = center><table>";
+	echo "<tr><td> Reply Text </td><td>Reply Time </td><td> Reply Posted By </td><tr> ";
       while($stmt->fetch()) {
 			echo '<hf>';
-			echo "<tr><td> Reply Text :</td><td>$th_text</td></tr>
-			</br></br>
-			<tr><td> Reply Time : </td><td> $th_time</td></tr>
-			</br></br>
-			<tr><td> Reply Posted By : </td><td> $th_postedby</td></tr>
-			</br></br>";
+			echo "<tr><td>$th_text</td><td> $th_time</td>
+			<td> $th_postedby</td></tr>";
+			echo '</br></br>';
 
 		echo '</hf>';
   }
-  echo "</table>";
+  echo "</table></div>";
   }
 } 
 	 echo '</br>';
@@ -76,12 +68,15 @@ if ($stmt = $mysqli->prepare("select th.id , th.thread_text , th.thread_time, u1
 	
 	echo '</br>'; 
 echo'<form method = "post">';
-echo '<hf>';
-echo "<tr><td>Post a Reply :</td>"; 
-echo "<td> <textarea name='replyDesc' rows='5' cols='30'></textarea></td></tr>";
+echo '<div align =  left>';
+echo "<tr><hf>Post a Reply :</hf></tr>"; 
+echo '</br>';
+echo'</br>';
+echo "<tr><td> <textarea name='replyDesc' rows='5' cols='80'></textarea></td></tr>";
+echo '</br>';
+echo'</br>';
 echo "<td><input type='submit'  class = 'btn' name = 'Send' value='Send'/></td>";
-echo '</hf>';
-echo "</div>";
+echo '</div>';
 
 if(isset($_POST['Send']))
 	{
