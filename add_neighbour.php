@@ -17,7 +17,7 @@ if(!isset($_SESSION['username'])) { //if not yet logged in
    header("Location: index.html");// send to login page
    exit;
 }
-//echo $_SESSION['username'];
+
 ?>
 <body>
 
@@ -31,10 +31,8 @@ $sender_id = 0;
 echo '<form method  ="post">';
 $requests = "";
 
-if ($stmt = $mysqli->prepare("select DISTINCT(u.id), u.first_name , u.last_name , n.hood_address, b.block_address from neighbours.users u, neighbours.neighbourhoods  n,
-	neighbours.blocks b, neighbours.neighbours ne
-	where u.hood_id = n.id and u.block_id = b.id 
-	and ne.user_id = '$userId' ;")) {
+if ($stmt = $mysqli->prepare("select DISTINCT(u.id), u.first_name , u.last_name , n.hood_address, b.block_address from neighbours.users u, neighbours.neighbourhoods  n,neighbours.blocks b where u.hood_id = n.id and u.block_id = b.id and b.id = (select block_id from neighbours.users u2 
+where u2.id = '$userId') and u.id not in (select neighbour_id from neighbours.neighbours where user_id = '$userId') and u.id != '$userId'")) {
   $stmt->execute();
   $stmt->bind_result( $id, $first_name , $last_name , $hood_address , $block_address);
   if($stmt != null)
@@ -50,35 +48,52 @@ if ($stmt = $mysqli->prepare("select DISTINCT(u.id), u.first_name , u.last_name 
 	}
 	else
 	{
-	echo '<hd>';
+	echo '<div align  = left><hd>';
 	echo "You have '$stmt->num_rows' new neighbours";
 	echo '</hd>';
 	echo '</br>';
 	echo '</br>';
 	echo '</br>';
-	
-	echo "<table class='table table-striped table-bordered table-condensed' style='width: 500px;'>
-<thead><tr><th>Name</th><th>Neighbourhood</th><th>Send</th></tr></thead>";
+	echo '</div>';
+	echo "<div class='table-style-three' align = left><table>
+<thead><tr><th>Select</th><th>Name</th><th>Neighbourhood</th><th>Block</th></tr></thead>";
 }
 while($stmt->fetch()) {
 			
-echo "<tr><td> $first_name $last_name</td><td> $hood_address</td>
-<td><input type='submit' class= 'btn' name = 'send' value='Send' id = 'accept.$sender_id' onClick = 'return add_neighbour($userId, $id);'/></td>";
+echo "<tr><td><input type = 'radio' name = 'radioChk' value = '$id'/>";
+echo "</td><td> $first_name $last_name</td><td> $hood_address</td><td> $block_address</td></tr>";
   }
   echo "</table>";
+  echo '</div>';
+  echo'</br>';
+echo'</br>';
+echo '<div align = left>';
+  echo "<input type='submit' class= 'btn' name = 'send' value='Add' />";
+  echo '</div>';
+  echo '</div>';
   }	  
   else
   {
 	echo '<hd>';
 	
-	echo "You have no pending friend requests";
+	echo "SQL error encountered";
 	
 	echo '</hd>';
 	}
   $stmt->close();
  
 }
-else
-{
-	echo"There is some sql error encountered";
-}
+
+if(isset($_POST['send']))
+	{
+	$result=$mysqli->prepare('insert into neighbours.neighbours (user_id , neighbour_id)values (? , ?)'); 
+	echo $_POST['radioChk'];
+	$result->bind_param("ii", $userId , $_POST['radioChk']);
+	$result->execute();
+	echo '<script> alert("Neighbour added Successfully"); </script>';
+	header("Refresh:0");
+	}
+echo '</form>';
+?>
+</body>
+</html>	
