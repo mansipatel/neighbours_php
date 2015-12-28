@@ -46,14 +46,14 @@ if ($stmt = $mysqli->prepare("select DISTINCT(u.id), u.first_name , u.last_name 
 	}
 	else
 	{
-	echo '<div align  = center><hd>';
+	echo '<div align  = left><hd>';
 	echo "You have '$stmt->num_rows' new friend suggestions";
-	echo '</hd></div>';
+	echo '</hd>';
 	echo '</br>';
 	echo '</br>';
 	echo '</br>';
-	
-	echo "<table class='table-style-three ' style='width: 500px;'>
+	echo '</div>';
+	echo "<div class='table-style-three' align = left><table>
 <thead><tr><th>Select</th><th>Name</th><th>Neighbourhood</th><th>Block</th></tr></thead>";
 }
 while($stmt->fetch()) {
@@ -63,9 +63,10 @@ echo "</td><td> $first_name $last_name</td><td> $hood_address</td><td> $block_ad
 }
 
   echo "</table>";
+  echo '</div>';
   echo'</br>';
 echo'</br>';
-echo '<div align = center>';
+echo '<div align = left>';
   echo "<input type='submit' class= 'btn' name = 'send' value='Send' />";
   echo '</div>';
   echo '</div>';
