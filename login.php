@@ -43,25 +43,40 @@
 			  	$stmt2->bind_result($block_id);
 			  	$stmt2->store_result();
 			  	$stmt2->fetch();
-			 }
+			 
 //echo $hood_id . ';'. $block_id;
 
-     		$query = "insert into  neighbours.users(username ,email, password, first_name,
-     			 last_name,creation_date,last_login_time, hood_id, block_id, status, zip)
-     		 values (?,?,?,?,?,?,?,?,?,?,?)";
-     		// echo $query;
-			$stmt = $mysqli->prepare($query);
-			$stmt->bind_param("sssssssiisi", $input_username , $input_email, $input_pass, 
-					$input_firstname, $input_lastname, $creation_date, $last_login,
-					 $hood_id, $block_id, $status,$input_zip);
-			
-			if($stmt->execute()){
-							header('Location: homePage.php');
+	     		$query = "insert into  neighbours.users(username ,email, password, first_name,
+	     			 last_name,creation_date,last_login_time, hood_id, block_id, status, zip)
+	     		 values (?,?,?,?,?,?,?,?,?,?,?)";
+	     		// echo $query;
+				$stmt = $mysqli->prepare($query);
+				$stmt->bind_param("sssssssiisi", $input_username , $input_email, $input_pass, 
+						$input_firstname, $input_lastname, $creation_date, $last_login,
+						 $hood_id, $block_id, $status,$input_zip);
+				
+				if($stmt->execute()){
+					// echo "I am in right page";
+					// die();
+					header('Location: homePage.php');
 					exit;
-				$stmt->close();
+					$stmt->close();
+				}
+				else{
+               		echo "hi";
+               		echo "Execute failed: (" . $stmt->errno . ") " . $stmt->error;
+//                header('Location: index_error.html');
+			  	// echo "<h2>Check username and Password!!</h2>";
+			  	// exit;
+				}
 			}
-			else{
-				echo "Execute failed: (" . $stmt->errno . ") " . $stmt->error;
+
+	        else{
+               echo "hi";
+               echo "Execute failed: (" . $stmt->errno . ") " . $stmt->error;
+//                header('Location: index_error.html');
+			  	// echo "<h2>Check username and Password!!</h2>";
+			  	// exit;
 			}
 		
 
@@ -89,15 +104,15 @@
 	          
 					$stmt = $mysqli->prepare($query);
 						
-			if($stmt->execute()){
-				$stmt->close();
-			}
-	                                header('Location: homePage.php');
-									exit;
+					if($stmt->execute()){
+					$stmt->close();
+					}
+	                header('Location: homePage.php');
+					exit;
 			  	}
 				else
 		  		{
-			  		header('Location: index.html');
+			  		header('Location: index_error.html');
 			  		echo "Check username and Password!!";
 
 			  		exit;
@@ -105,7 +120,7 @@
 			}
 		  	else
 		  	{
-			  	header('Location: index.html');
+			  	header('Location: index_error.html');
 			  	echo "<h2>Check username and Password!!</h2>";
 			  	exit;
 		  	}
