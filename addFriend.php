@@ -30,7 +30,7 @@ $sender_id = 0;
 echo '<form method  ="post">';
 $requests = "";
 echo '<div>';
-if ($stmt = $mysqli->prepare("select DISTINCT(u.id), u.first_name , u.last_name , n.hood_address, b.block_address from neighbours.users u, neighbours.neighbourhoods  n,neighbours.blocks b where u.hood_id = n.id and u.block_id = b.id  and u.id not in (select friend_id from neighbours.friends where user_id = '$userId') ;")) {
+if ($stmt = $mysqli->prepare("select DISTINCT(u.id), u.first_name , u.last_name , n.hood_address, b.block_address from neighbours.users u, neighbours.neighbourhoods  n,neighbours.blocks b where u.hood_id = n.id and u.block_id = b.id  and u.id not in (select friend_id from neighbours.friends where user_id = '$userId') and u.id not in (select user_id from neighbours.friend_requests where status = 'pending' and sender_id = '$userId') ;")) {
   $stmt->execute();
   $stmt->bind_result( $id, $first_name , $last_name , $hood_address , $block_address);
   if($stmt != null)
@@ -46,14 +46,14 @@ if ($stmt = $mysqli->prepare("select DISTINCT(u.id), u.first_name , u.last_name 
 	}
 	else
 	{
-	echo '<div align  = center><hd>';
+	echo '<div align  = left><hd>';
 	echo "You have '$stmt->num_rows' new friend suggestions";
-	echo '</hd></div>';
+	echo '</hd>';
 	echo '</br>';
 	echo '</br>';
 	echo '</br>';
-	
-	echo "<table class='table-style-three ' style='width: 500px;'>
+	echo '</div>';
+	echo "<div class='table-style-three' align = left><table>
 <thead><tr><th>Select</th><th>Name</th><th>Neighbourhood</th><th>Block</th></tr></thead>";
 }
 while($stmt->fetch()) {
@@ -63,9 +63,10 @@ echo "</td><td> $first_name $last_name</td><td> $hood_address</td><td> $block_ad
 }
 
   echo "</table>";
+  echo '</div>';
   echo'</br>';
 echo'</br>';
-echo '<div align = center>';
+echo '<div align = left>';
   echo "<input type='submit' class= 'btn' name = 'send' value='Send' />";
   echo '</div>';
   echo '</div>';
@@ -89,7 +90,7 @@ if(isset($_POST['send']))
 	$result->bind_param("ii",$_POST['radioChk'] , $userId);
 	$result->execute();
 	echo '<script> alert("Friend Request Sent Successfully"); </script>';
-
+	header("Refresh:0");
 	}
 echo '</form>';
 ?>

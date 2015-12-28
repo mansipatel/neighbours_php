@@ -39,9 +39,10 @@
               <li <?php if($active_link=="friend_req") echo "class=active"; ?>><a href="friend_req.php">Pending Friend Requests</a></li>
               <li <?php if($active_link=="block_requests") echo "class=active"; ?>><a href="block_requests.php">Block Requests</a></li>
               <li <?php if($active_link=="messages") echo "class=active"; ?>><a href="messages.php">Feeds</a></li>
-	      <li <?php if($active_link=="add_friend") echo "class=active"; ?>><a href="#">Add Friend</a></li>
+	      <li <?php if($active_link=="addFriend") echo "class=active"; ?>><a href="addFriend.php">Add Friend</a></li>
 	      <li <?php if($active_link=="add_neighbour") echo "class=active"; ?>><a href="add_neighbour.php">Add Neighbour</a></li>
 	      <li <?php if($active_link=="sendMessage") echo "class=active"; ?>><a href="sendMessage.php">Post Message</a></li>
+		  <li <?php if($active_link=="blockChange") echo "class=active"; ?>><a href="blockChange.php">Block Change</a></li>
             </ul>
           </div>
         </div>

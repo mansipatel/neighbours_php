@@ -18,34 +18,15 @@ if(!isset($_SESSION['username'])) { //if not yet logged in
 } 
 ?>
 <body>
-<?php 
-$active_link = "messages";
-include "header.php"; 
-echo "<table class='table table-striped table-bordered table-condensed' style='width: 500px;'>
-<thead><tr><th>Feed: 1</th><th>Feed: 2</th><th>Feed: 3</th></tr></thead>";
-
-echo '<tr><td> <a style="color:black" href="personalFeed.php">Personal Feeds</a></td>
-      <td> <a style="color:black" href="neighbourFeed.php">Neighbourhood Feeds</a></td>
-      <td> <a style="color:black" href="blockFeed.php">Block Feeds</a></td>';
-// echo '<td><>
-//     <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><ul>
-//     <center><li class="first"><a style="color:black" href="personalFeed.php">Personal Feeds</a></li>
-//     <li class="active"><a style="color:black" href="neighbourFeed.php">Neighbourhood Feeds</a></li>
-//     <li class="last"><a style="color:black" href="blockFeed.php">Block Feeds</a></li>
-//   </ul> 
-//   </div>'
-?>
-<!-- <div class="main">
+<div class="main">
   <div class="main_resize">
     <div class="header">
       <div class="logo">
         <h1><a href="#"><span>Neighbour </span>  Space<small>  Share & Care</small></a></h1>
-      </div>-->
+      </div>
      
-	 <!-- <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/> -->
-   
-
-	  <!-- <div class = "message">
+	 
+	  <div class = "message">
 		  <b>Welcome  <?php echo $_SESSION['firstName']; ?></b>
 		  </div>
       <div class="menu_nav">
@@ -59,7 +40,14 @@ echo '<tr><td> <a style="color:black" href="personalFeed.php">Personal Feeds</a>
         <div class="clr"></div>
       </div>
 	   
-	
+		
+		<div id="roundbar-blue">
+	<ul>
+		<li class="first"><a style="color:white" href="personalFeed.php">Personal Feeds</a></li>
+		<li class="active"><a style="color:white" href="neighbourFeed.php">Neighbourhood Feeds</a></li>
+		<li class="last"><a style="color:white" href="blockFeed.php">Block Feeds</a></li>
+	</ul> 
+	</div> 
 	 </div>
     </div>
     <div class="content">
@@ -77,9 +65,11 @@ echo '<tr><td> <a style="color:black" href="personalFeed.php">Personal Feeds</a>
               <li><a href="friend_req.php">Pending Friend Requests</a></li>
               <li><a href="block_requests.php">Block Requests</a></li>
               <li class="active"><a href="messages.php">Feeds</a></li>
-			  <li><a href="#">Add Friend</a></li>
-			  <li><a href="#">Add Neighbour</a></li>
+			  <li><a href="addFriend.php">Add Friend</a></li>
+			  <li><a href="add_neighbour.php">Add Neighbour</a></li>
 			   <li><a href="sendMessage.php">Post Message</a></li>
+			   <li><a href="blockChange.php">Block Change</a></li>
+
             </ul>
           </div>
         
@@ -89,6 +79,6 @@ echo '<tr><td> <a style="color:black" href="personalFeed.php">Personal Feeds</a>
     </div>
   </div>
 
-</div> -->
+</div>
 </body>
 </html>
