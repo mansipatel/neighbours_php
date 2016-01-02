@@ -102,7 +102,7 @@ if ($stmt = $mysqli->prepare("select u.status , u.block_id from neighbours.users
 }
 				if($statusCheck == 'confirmed') //So only users who are accepted members of that block can view the block requests and not anyone else
 				{
-					if ($stmt2 = $mysqli->prepare("SELECT u.first_name,u.last_name,n.hood_address,b.block_address,u.id
+					if ($stmt2 = $mysqli->prepare("SELECT distinct(u.first_name),u.last_name,n.hood_address,b.block_address,u.id
 													FROM
 												neighbours.neighbourhoods n,neighbours.blocks b,neighbours.users u
 												LEFT OUTER JOIN neighbours.block_requests br 

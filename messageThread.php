@@ -48,10 +48,15 @@ if ($stmt = $mysqli->prepare("select m.id , m.msg_text , m.msg_title , m.msg_tim
 if ($stmt = $mysqli->prepare("select th.id , th.thread_text , th.thread_time, u1.first_name from  neighbours.threads th , neighbours.users u1 where u1.id = th.thread_by and th.msg_id = '$messageId' ")) {	
   $stmt->execute();
   $stmt->bind_result( $th_id  , $th_text  , $th_time , $th_postedby );
+    $stmt->store_result();
+
   if($stmt != null)
   {
+  	if($stmt->num_rows > 0)
+  	{
 	echo "<div class='table-style-three' align  = center><table>";
 	echo "<tr><td> Reply Text </td><td>Reply Time </td><td> Reply Posted By </td><tr> ";
+    }
       while($stmt->fetch()) {
 			echo '<hf>';
 			echo "<tr><td>$th_text</td><td> $th_time</td>
@@ -85,11 +90,12 @@ if(isset($_POST['Send']))
 	$result->execute();
 	$stmt->close();
 	echo '<script> alert("Reply Posted Successfully"); </script>';
-
+	header("Refresh:0");
 	}			
 		
   
 echo '</form>';
+
  ?>
 </body>
 </html>

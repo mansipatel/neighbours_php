@@ -40,6 +40,7 @@ if(!isset($_SESSION['username'])) { //if not yet logged in
         <div class="clr"></div>
       </div>
 	   
+
 		
 		<div id="roundbar-blue">
 	<ul>
@@ -48,9 +49,20 @@ if(!isset($_SESSION['username'])) { //if not yet logged in
 		<li class="last"><a style="color:white" href="blockFeed.php">Block Feeds</a></li>
 	</ul> 
 	</div> 
-	 </div>
+<!-- 	search box start-->  
+</div>
+   <div class="search">
+        <form method="post" id="search" action="#">
+          <span>
+          <input type="text" value="Search" name="s" id="s" />
+          <input name="searchsubmit" type="image" src="images/search.gif" value="Go" id="searchsubmit" class="btn"  />
+          </span>
+        </form>
     </div>
-    <div class="content">
+</div>
+<!-- search box end -->
+
+<div class="content">
       <div class="content_bg">
         <div class="mainbar">
         </div>
@@ -61,7 +73,7 @@ if(!isset($_SESSION['username'])) { //if not yet logged in
             <ul class="sb_menu">
              <li ><a href="homePage.php">Home</a></li>
               <li><a href="friend_list.php">Friends</a></li>
-              <li><a href="#">Neighbours</a></li>
+              <li><a href="neighbour_list.php">Neighbours</a></li>
               <li><a href="friend_req.php">Pending Friend Requests</a></li>
               <li><a href="block_requests.php">Block Requests</a></li>
               <li class="active"><a href="messages.php">Feeds</a></li>
@@ -82,3 +94,49 @@ if(!isset($_SESSION['username'])) { //if not yet logged in
 </div>
 </body>
 </html>
+<!-- search logic -->
+<?php
+ if(isset($_POST['s']))
+ { 
+  $send = ($_POST['s']);
+   //echo "print search";
+  if($stmt = $mysqli->prepare("select m.id , m.msg_title , m.msg_text , u.first_name , m.msg_time  
+                            from neighbours.messages  m ,  neighbours.users u , neighbours.message_recipients r 
+                            where   m.id = r.msg_id   and m.msg_by = u.id  and r.recipient_type = 'B' and
+                            m.msg_text like '%$send%' and 
+                            r.recipient_id=  (select block_id from neighbours.users where id = '$userId')")) 
+
+  {
+      $stmt->execute();
+      $stmt->bind_result($msg_id , $msg_title , $msg_text , $first_name , $msg_time );
+      if($stmt != null)
+      {
+      $stmt->store_result();
+        if( $stmt->num_rows > 0)
+        { echo '</br>';
+          echo '</br>';
+          echo '</br>';
+          echo '</br>';
+          echo "<div class='table-style-three'><table>
+            <thead><tr><th>Message Title</th><th>Message Text</th><th>Posted By</th><th>Posted Date</th></tr></thead>";
+        }
+        while($stmt->fetch()) 
+        {
+        echo '<hd>';
+        echo '</hd>';
+        echo "<tr><td> <a href = 'messageThread.php?msgId=$msg_id'>$msg_title</a> </td><td>$msg_text </td><td> $first_name </td><td> $msg_time</td>
+        </tr>";
+          
+        }
+        echo "</table></div>";      
+      }
+        else
+      {
+      "There is some sql error encountered in status query";
+      }
+      $stmt->close();
+  }
+    echo '<script> alert("Success"); </script>';
+    //header("Refresh:0");
+}
+?> 

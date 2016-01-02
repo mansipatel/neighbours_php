@@ -12,7 +12,7 @@
       <div class="menu_nav">
 	<b>Welcome  <?php echo $_SESSION['firstName']; ?></b>
         <ul>
-          <li><a href="/profile.php">Profile</a></li>
+          <li><a href="profile.php">Profile</a></li>
 	  <li> <a href="logout.php">Logout</a></li>
         </ul>
         <div class="clr"></div>

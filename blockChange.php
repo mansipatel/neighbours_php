@@ -22,7 +22,7 @@ if(!isset($_SESSION['userId'])) { //if not yet logged in
 <body>
 
 <?php 
-$active_link = "add_friend";
+$active_link = "blockChange";
 include "header.php"; 
 ?>
 
@@ -74,13 +74,20 @@ if(isset($_POST['Change']))
 			  	$stmt2->store_result();
 			  	$stmt2->fetch();
 			 }
-			 $query = "update neighbours.users set hood_id = ? , block_id = ? , status = 'pending' where id = '$userId'";
+			 $query = "update neighbours.users set hood_id = ? , block_id = ? , status = 'pending', zip = ? where id = '$userId'";
 			$stmt = $mysqli->prepare($query);
-			$stmt->bind_param("ii", $hood_id , $block_id);
+			//echo $zip;
+			$stmt->bind_param("iii", $hood_id , $block_id, $zip);
 			if($stmt->execute()){
-				echo '<script> alert("Block Change carried out Successfully"); </script>';
 				$stmt->close();
 			}
+			 $query = "delete from neighbours.block_requests  where requester_id = '$userId'";
+			$stmt3 = $mysqli->prepare($query);
+			if($stmt3->execute()){
+				echo '<script> alert("Block Change carried out Successfully"); </script>';
+				$stmt3->close();
+			}
+			
 
 	}
 echo '</form>';

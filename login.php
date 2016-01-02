@@ -56,9 +56,7 @@
 						 $hood_id, $block_id, $status,$input_zip);
 				
 				if($stmt->execute()){
-					// echo "I am in right page";
-					// die();
-					header('Location: homePage.php');
+					header('Location: index_signup.html');
 					exit;
 					$stmt->close();
 				}

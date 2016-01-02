@@ -57,11 +57,11 @@ if(!isset($_SESSION['username'])) { //if not yet logged in
             <ul class="sb_menu">
              <li><a href="homePage.php">Home</a></li>
               <li><a href="friend_list.php">Friends</a></li>
-              <li><a href="#">Neighbours</a></li>
+              <li><a href="add_neighbour.php">Neighbours</a></li>
               <li class="active"><a href="friend_req.php">Pending Friend Requests</a></li>
               <li><a href="block_requests.php">Block Requests</a></li>
               <li><a href="messages.php">Feeds</a></li>
-			  <li><a href="#">Add Friend</a></li>
+			  <li><a href="addFriend.php">Add Friend</a></li>
 			  <li><a href="add_neighbour.php">Add Neighbour</a></li>
 			   <li><a href="sendMessage.php">Post Message</a></li>
 			      <li><a href="blockChange.php">Block Change</a></li>
